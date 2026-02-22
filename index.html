@@ -1,0 +1,982 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HORIZONTE PARTIDO</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=Crimson+Text:ital,wght@0,400;0,600;1,400&family=Special+Elite&display=swap');
+
+        :root {
+            --void-black: #0a0a0f;
+            --abyss-purple: #1a0a2e;
+            --nightmare-red: #4a0a0a;
+            --blood-red: #8a0a0a;
+            --flesh-pale: #c9b8a8;
+            --shadow-gray: #2a2a3a;
+            --leng-green: #1a3a2a;
+            --nimbaloth-blue: #0a1a2e;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background-color: var(--void-black);
+            background-image:
+                radial-gradient(ellipse at center, var(--abyss-purple) 0%, var(--void-black) 100%),
+                url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+            color: var(--flesh-pale);
+            font-family: 'Crimson Text', Georgia, serif;
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+
+        /* Nightmare Fog Effect */
+        .fog-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 1000;
+            opacity: 0.3;
+        }
+
+        .fog-img {
+            position: absolute;
+            height: 100vh;
+            width: 300vw;
+            background: url('https://raw.githubusercontent.com/danielstuart14/CSS_FOG_ANIMATION/master/fog1.png') repeat-x;
+            background-size: contain;
+            animation: fog 60s linear infinite;
+        }
+
+        .fog-img-2 {
+            background: url('https://raw.githubusercontent.com/danielstuart14/CSS_FOG_ANIMATION/master/fog2.png') repeat-x;
+            background-size: contain;
+            animation: fog 40s linear infinite;
+            z-index: 1;
+            top: 30%;
+        }
+
+        @keyframes fog {
+            0% {
+                transform: translate3d(0, 0, 0);
+            }
+
+            100% {
+                transform: translate3d(-200vw, 0, 0);
+            }
+        }
+
+        /* Header */
+        header {
+            text-align: center;
+            padding: 20px 10px;
+            background: linear-gradient(180deg, var(--nightmare-red) 0%, var(--void-black) 100%);
+            border-bottom: 3px solid var(--blood-red);
+            position: relative;
+            /* Opcional: Garante que o conteúdo não tenha margens extras vindo de fora */
+            overflow: hidden;
+        }
+
+        /* Mantenha o header::before igual, ele apenas cuida do padrão de fundo */
+        header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%230a0a0f' fill-opacity='0.4'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+            opacity: 0.5;
+        }
+
+        h1 {
+            font-family: 'Cinzel', serif;
+            font-size: 3.5rem;
+            color: var(--blood-red);
+            text-shadow:
+                0 0 10px var(--void-black),
+                0 0 20px var(--void-black),
+                0 0 40px var(--void-black);
+            letter-spacing: 8px;
+            margin-bottom: 15px;
+            position: relative;
+            animation: pulse 2s ease-in-out infinite;
+        }
+
+        @keyframes pulse {
+
+            0%,
+            100% {
+                text-shadow: 0 0 10px var(--blood-red), 0 0 20px var(--nightmare-red), 0 0 40px var(--nightmare-red);
+            }
+
+            50% {
+                text-shadow: 0 0 20px var(--blood-red), 0 0 40px var(--nightmare-red), 0 0 60px var(--blood-red);
+            }
+        }
+
+        .season-tag {
+            display: block;
+            /* Faz o texto ir para a linha de baixo */
+            font-size: 0.4em;
+            /* Deixa bem menor que o título principal */
+            letter-spacing: 4px;
+            /* Dá um ar mais elegante e "cinematográfico" */
+            margin-top: -5px;
+            /* Ajusta a proximidade com o título */
+            opacity: 0.8;
+            /* Deixa levemente transparente para não tirar o foco */
+        }
+
+        .subtitle {
+            font-family: 'Special Elite', cursive;
+            font-size: 1.2rem;
+            color: var(--flesh-pale);
+            opacity: 0.7;
+            letter-spacing: 4px;
+        }
+
+        .system-info {
+            margin-top: 30px;
+            font-size: 0.9rem;
+            color: var(--flesh-pale);
+            opacity: 0.6;
+        }
+
+        /* Navigation */
+        nav {
+            background: var(--abyss-purple);
+            padding: 20px;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            border-bottom: 1px solid var(--blood-red);
+        }
+
+        nav ul {
+            display: flex;
+            justify-content: center;
+            gap: 40px;
+            list-style: none;
+            flex-wrap: wrap;
+        }
+
+        nav a {
+            color: var(--flesh-pale);
+            text-decoration: none;
+            font-family: 'Cinzel', serif;
+            font-size: 1rem;
+            padding: 10px 20px;
+            border: 1px solid transparent;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        nav a::before {
+            content: '✧';
+            margin-right: 10px;
+            color: var(--blood-red);
+        }
+
+        nav a::after {
+            content: '✧';
+            margin-left: 10px;
+            color: var(--blood-red);
+        }
+
+        nav a:hover {
+            border-color: var(--blood-red);
+            text-shadow: 0 0 10px var(--blood-red);
+        }
+
+        /* Main Content */
+        main {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 40px 20px;
+        }
+
+        section {
+            margin-bottom: 60px;
+            background: linear-gradient(135deg, rgba(26, 10, 46, 0.8) 0%, rgba(10, 10, 15, 0.9) 100%);
+            padding: 40px;
+            border: 1px solid var(--shadow-gray);
+            border-left: 4px solid var(--blood-red);
+            position: relative;
+            overflow: hidden;
+        }
+
+        section::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, transparent 20%, var(--void-black) 100%);
+            pointer-events: none;
+        }
+
+        h2 {
+            font-family: 'Cinzel', serif;
+            font-size: 2rem;
+            color: var(--blood-red);
+            margin-bottom: 30px;
+            padding-bottom: 15px;
+            border-bottom: 1px solid var(--shadow-gray);
+            position: relative;
+        }
+
+        h2::after {
+            content: '';
+            position: absolute;
+            bottom: -1px;
+            left: 0;
+            width: 100px;
+            height: 2px;
+            background: var(--blood-red);
+            box-shadow: 0 0 10px var(--blood-red);
+        }
+
+        /* Characters Section */
+        .characters-grid {
+            display: grid;
+            /* Força exatamente 2 colunas com larguras iguais */
+            grid-template-columns: repeat(2, 1fr);
+            /* Define o espaçamento entre os cards */
+            gap: 30px;
+            /* Opcional: define uma largura máxima para o grid não esticar demais em monitores ultra-wide */
+            max-width: 900px;
+            margin: 0 auto;
+            /* Centraliza o grid na página */
+        }
+
+        /* Ajuste para dispositivos móveis (opcional, mas recomendado) */
+        @media (max-width: 600px) {
+            .characters-grid {
+                /* Em telas muito pequenas, volta para 1 coluna para não esmagar os PJs */
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .character-card {
+            background: var(--void-black);
+            border: 1px solid var(--shadow-gray);
+            padding: 20px;
+            text-align: center;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .character-card:hover {
+            transform: translateY(-5px);
+            border-color: var(--blood-red);
+            box-shadow: 0 10px 30px rgba(138, 10, 10, 0.3);
+        }
+
+        /* 1. Estilo base para o espaço do ícone */
+        .character-card::before {
+            content: '';
+            /* Deixe vazio, pois usaremos imagem de fundo */
+            position: absolute;
+            width: 50px;
+            /* Ajuste o tamanho da largura do seu ícone */
+            height: 50px;
+            /* Ajuste a altura do seu ícone */
+            background-size: contain;
+            background-repeat: no-repeat;
+            opacity: 0.3;
+            z-index: 2;
+            /* Garante que fique acima da foto */
+        }
+
+        .character-card:nth-child(1)::before {
+            background-image: url('monkc.png');
+            top: 10px;
+            left: 10px;
+        }
+
+        .character-card:nth-child(2)::before {
+            background-image: url('druidc.png');
+            top: 10px;
+            left: 374px;
+        }
+
+        .character-card:nth-child(3)::before {
+            background-image: url('monkc.png');
+            top: 208px;
+            left: 10px;
+        }
+
+        .character-card:nth-child(4)::before {
+            background-image: url('barbarianc.png');
+            top: 208px;
+            left: 374px;
+        }
+
+
+        .character-photo {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            background: var(--abyss-purple);
+            border: 3px solid var(--blood-red);
+            margin: 0 auto 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .character-photo img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .character-name {
+            font-family: 'Cinzel', serif;
+            font-size: 1.3rem;
+            color: var(--flesh-pale);
+            margin-bottom: 10px;
+        }
+
+        .character-class {
+            font-size: 0.9rem;
+            color: var(--blood-red);
+            opacity: 0.8;
+        }
+
+        /* House Rules */
+        .rules-list {
+            list-style: none;
+        }
+
+        .rules-list li {
+            padding: 15px 0;
+            border-bottom: 1px solid var(--shadow-gray);
+            display: flex;
+            align-items: flex-start;
+            gap: 15px;
+        }
+
+        .rules-list li:last-child {
+            border-bottom: none;
+        }
+
+        .rule-icon {
+            font-size: 1.5rem;
+            color: var(--blood-red);
+            min-width: 40px;
+        }
+
+        .rule-title {
+            font-family: 'Cinzel', serif;
+            color: var(--flesh-pale);
+            margin-bottom: 5px;
+        }
+
+        .rule-description {
+            font-size: 0.95rem;
+            opacity: 0.8;
+            line-height: 1.6;
+        }
+
+        /* Sessions */
+        .session-card {
+            background: rgba(10, 10, 15, 0.5);
+            border: 1px solid var(--shadow-gray);
+            padding: 25px;
+            margin-bottom: 20px;
+            position: relative;
+        }
+
+        .session-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 4px;
+            height: 100%;
+            background: var(--blood-red);
+        }
+
+        .session-number {
+            font-family: 'Special Elite', cursive;
+            color: var(--blood-red);
+            font-size: 1.1rem;
+            margin-bottom: 10px;
+        }
+
+        .session-title {
+            font-family: 'Cinzel', serif;
+            font-size: 1.3rem;
+            color: var(--flesh-pale);
+            margin-bottom: 15px;
+        }
+
+        .session-summary {
+            line-height: 1.8;
+            opacity: 0.85;
+        }
+
+        /* Location Section */
+        .location-info {
+            display: grid;
+            /* Força exatamente 2 colunas com larguras iguais */
+            grid-template-columns: repeat(2, 1fr);
+            gap: 30px;
+        }
+
+        .location-card {
+            background: var(--void-black);
+            border: 1px solid var(--leng-green);
+            padding: 25px;
+        }
+
+        .location-card h3 {
+            font-family: 'Cinzel', serif;
+            color: var(--flesh-pale);
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .location-card h3::before {
+            content: '◈';
+            color: var(--blood-red);
+        }
+
+        .location-details {
+            opacity: 0.8;
+            line-height: 1.6;
+        }
+
+        /* Credits */
+        .credits {
+            text-align: center;
+            padding: 40px 20px;
+            background: var(--nightmare-red);
+            margin-top: 60px;
+        }
+
+        .credits p {
+            opacity: 0.7;
+            margin: 10px 0;
+        }
+
+        .credits strong {
+            color: var(--blood-red);
+        }
+
+        /* Footer */
+        footer {
+            text-align: center;
+            padding: 30px;
+            background: var(--void-black);
+            border-top: 1px solid var(--shadow-gray);
+            font-size: 0.85rem;
+            opacity: 0.5;
+        }
+
+        /* Scrollbar */
+        ::-webkit-scrollbar {
+            width: 10px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: var(--void-black);
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: var(--blood-red);
+            border-radius: 5px;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: var(--nightmare-red);
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2rem;
+            }
+
+            nav ul {
+                gap: 15px;
+            }
+
+            section {
+                padding: 25px;
+            }
+        }
+
+        .lightning-bolt {
+            position: fixed;
+            /* Fixa na tela, ignorando o scroll */
+            top: 50%;
+            /* Alinha o topo no meio da tela */
+            left: 50%;
+            /* Alinha a esquerda no meio da tela */
+            transform: translate(-50%, -50%);
+            /* Centraliza o próprio eixo da imagem */
+
+            width: auto;
+            /* Mantém o tamanho original ou ajuste como preferir */
+            max-width: 80%;
+            /* Evita que a imagem estoure a tela em celulares */
+            opacity: 0;
+            pointer-events: none;
+            /* Garante que ninguém clique na imagem por acidente */
+            z-index: 9999;
+            /* Garante que fique por cima de todos os textos e botões */
+        }
+
+        /* A animação permanece a mesma */
+        .animate-lightning {
+            animation: lightning-flash 0.6s ease-out;
+        }
+
+        @keyframes lightning-flash {
+            0% {
+                opacity: 0;
+            }
+
+            10% {
+                opacity: 0.5;
+                filter: brightness(2);
+            }
+
+            /* Brilho extra no estouro */
+            20% {
+                opacity: 0.2;
+            }
+
+            30% {
+                opacity: 0.5;
+            }
+
+            100% {
+                opacity: 0;
+            }
+        }
+
+        /* Esta classe será adicionada via JavaScript */
+        .animate-lightning {
+            animation: lightning-flash 0.6s ease-out;
+        }
+
+        @keyframes lightning-flash {
+            0% {
+                opacity: 0;
+            }
+
+            10% {
+                opacity: 1;
+            }
+
+            20% {
+                opacity: 0.2;
+            }
+
+            30% {
+                opacity: 0.8;
+            }
+
+            100% {
+                opacity: 0;
+            }
+        }
+
+        /* Nightmare text effect */
+        .nightmare-text {
+            position: relative;
+        }
+
+        .nightmare-text:hover::after {
+            content: attr(data-nightmare);
+            position: absolute;
+            left: 2px;
+            top: 2px;
+            color: var(--blood-red);
+            opacity: 0.5;
+            z-index: -1;
+        }
+
+        /* Glitch effect for title */
+        .glitch {
+            animation: glitch 3s infinite;
+        }
+
+        @keyframes glitch {
+
+            0%,
+            90%,
+            100% {
+                transform: translate(0);
+            }
+
+            92% {
+                transform: translate(-2px, 1px);
+            }
+
+            94% {
+                transform: translate(2px, -1px);
+            }
+
+            96% {
+                transform: translate(-1px, 2px);
+            }
+
+            98% {
+                transform: translate(1px, -2px);
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Nightmare Fog Effect -->
+    <div class="fog-container">
+        <div class="fog-img"></div>
+        <div class="fog-img-2"></div>
+    </div>
+
+    <header>
+        <h1 class="glitch">
+            HORIZONTE PARTIDO
+            <small class="season-tag">2ª TEMPORADA</small>
+        </h1>
+        <p class="subtitle">Não é um sonho se o sangue ainda está no lençol...</p>
+        <p class="system-info">
+            Mestre Weber
+        </p>
+    </header>
+
+    <nav>
+        <ul>
+            <li><a href="#personagens">Personagens</a></li>
+            <li><a href="#regras">Regras da Casa</a></li>
+            <li><a href="#sessoes">Resumos das Sessões</a></li>
+            <li><a href="#locais">Locais & Agenda</a></li>
+        </ul>
+    </nav>
+
+    <main>
+        <img src="Nhimbaloth.png" class="lightning-bolt" id="lightning">
+        <!-- Personagens Section -->
+        <section id="personagens">
+            <h2>✧ Amaldiçoados ✧</h2>
+            <p style="margin-bottom: 30px; font-style: italic; opacity: 0.7;">
+                Aqueles que carregam o peso dos pesadelos em suas mentes... E devem cumprir desafios se quiserem
+                retornar sãos desta jornada.
+            </p>
+            <div class="characters-grid">
+                <!-- Character cards will be added here -->
+                <div class="character-card">
+                    <div class="character-photo">
+                        <img src="ahyllacristal.png" alt="Áhylla Cristal">
+                    </div>
+                    <h3 class="character-name">Áhylla Cristal</h3>
+                    <p class="character-class">Elfa Dhampira • Clériga</p>
+                </div>
+
+                <div class="character-card">
+                    <div class="character-photo">
+
+                        <img src="capyrus.png" alt="Capyrus">
+                    </div>
+                    <h3 class="character-name">Capyrus</h3>
+                    <p class="character-class">Humano Aiuvarin • Druida</p>
+                </div>
+
+                <div class="character-card">
+                    <div class="character-photo">
+
+                        <img src="planta.png" alt="Planta">
+                    </div>
+                    <h3 class="character-name">Planta</h3>
+                    <p class="character-class">Leshy Cabaça • Monge</p>
+                </div>
+
+                <div class="character-card">
+                    <div class="character-photo">
+
+                        <img src="tiktik.png" alt="Tiktik">
+                    </div>
+                    <h3 class="character-name">Tiktik</h3>
+                    <p class="character-class">Elfa Cambiante • Bárbara</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="locais">
+            <h2>✧ Pesadelos Recorrentes ✧</h2>
+            <p style="margin-bottom: 30px; font-style: italic; opacity: 0.7;">
+                O cansaço da rotina como <strong>Desbravador da Alvorada</strong> finalmente cobra seu preço. O conforto
+                da sede da
+                guilda é a última coisa que você se lembra antes que o mundo físico se dissolvesse em um preto absoluto.
+                Mas o despertar não traz o descanso esperado.
+                Você abre os olhos sob um céu de cor púrpura doentia, onde estrelas desconhecidas e frias parecem
+                observar vocês como olhos distantes. O ar é rarefeito, seco e carrega um cheiro metálico. Você não está
+                mais em <strong>Solarion</strong>.
+                À frente, estende-se o Planalto de Leng.
+                Sob seus pés, a rocha negra é esculpida em ângulos que agridem a visão — geometrias que a mente humana
+                não foi feita para compreender. Ao longe, picos de montanhas impossivelmente altas rasgam o horizonte,
+                encimadas por monastérios de pedra onde luzes esverdeadas tremeluzem. O silêncio perpetua,
+                interrompido apenas pelo som de suas próprias respirações e movimentos... e por um
+                tilintar distante, como se correntes de metal fossem arrastadas sobre ossos secos.
+
+                Você sente um frio que arrepia tua pele, e parece tentar tocar tua alma. Em
+                Leng, a morte significa o esquecimento do espírito.
+
+                <br>Bem-vindo ao lugar onde os pesadelos ganham forma.
+            </p>
+
+            <div
+                style="margin-top: 40px; padding: 30px; background: rgba(138, 10, 10, 0.1); border: 1px solid var(--blood-red);">
+                <h3
+                    style="font-family: 'Cinzel', serif; color: var(--blood-red); margin-bottom: 20px; text-align: center;">
+                    ⚔ AGENDA DAS SESSÕES ⚔</h3>
+                <div
+                    style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 20px; text-align: center;">
+                    <div>
+                        <p style="font-family: 'Special Elite', cursive; color: var(--flesh-pale);">Dia da Semana</p>
+                        <p style="font-size: 1.2rem; margin-top: 5px;">[A definir]</p>
+                    </div>
+                    <div>
+                        <p style="font-family: 'Special Elite', cursive; color: var(--flesh-pale);">Horário</p>
+                        <p style="font-size: 1.2rem; margin-top: 5px;">[A definir]</p>
+                    </div>
+                    <div>
+                        <p style="font-family: 'Special Elite', cursive; color: var(--flesh-pale);">Plataforma</p>
+                        <p style="font-size: 1.2rem; margin-top: 5px;">Foundry (do Mestre) / Discord</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Resumos das Sessões -->
+        <section id="sessoes">
+            <h2>✧ Crônicas do Pesadelo ✧</h2>
+            <p style="margin-bottom: 30px; font-style: italic; opacity: 0.7;">
+                Resumo das sessões já ocorridas.
+            </p>
+
+            <div class="session-card">
+                <p class="session-number">[Em breve]</p>
+                <h3 class="session-title">[Em breve]</h3>
+                <p class="session-summary">
+                    [Em breve]
+                </p>
+            </div>
+
+            <div
+                style="text-align: center; margin-top: 30px; padding: 20px; border: 1px dashed var(--blood-red); opacity: 0.6;">
+                <p style="font-family: 'Special Elite', cursive;">"A emoção mais antiga e mais forte da humanidade é o
+                    medo..<br>E o mais antigo e mais forte de todos os medos é o medo do desconhecido."</p>
+                <p style="margin-top: 10px; font-size: 0.85rem;">— HP Lovecraft</p>
+            </div>
+        </section>
+
+        <!-- Regras da Casa -->
+        <section id="regras">
+            <h2>✧ Devaneios (regra da casa) ✧</h2>
+            <p style="margin-bottom: 30px; font-style: italic; opacity: 0.7;">
+                As regras a seguir estão vigentes para esta Aventura.
+            </p>
+
+            <ul class="rules-list">
+                <li>
+                    <span class="rule-icon">👁</span>
+                    <div>
+                        <p class="rule-title">Corrupção dos Pesadelos</p>
+                        <p class="rule-description">A exposição prolongada ao Plano dos Pesadelos causa efeitos
+                            perturbadores. Cada 01 natural rolado pelos aventureiros em testes válidos com o d20, será
+                            anotado pelo Mestre. Quando obtiverem uma certa quantidade, todos adquirirão um Flagelo. Um
+                            efeito negativo aleatório. O mestre pode optar por re–rolar 01 vez cada rolagem aleatória,
+                            porém sendo obrigado a aceitar o resultado da segunda rolagem.</p>
+                    </div>
+                </li>
+                <li>
+                    <span class="rule-icon">🛏️</span>
+                    <div>
+                        <p class="rule-title">Entre sessões</p>
+                        <p class="rule-description">Os eventos e efeitos que acontecem nesta aventura, não continuam com
+                            o personagem fora da sessão, pois narrativamente a mesma se passa entre pesadelos dos
+                            aventureiros. Ou seja, teoricamente tudo não passa de sonhos. Horríveis, dolorosos e
+                            angustiantes. Mas sonhos.
+                        </p>
+                    </div>
+                </li>
+                <li>
+                    <span class="rule-icon">⏰</span>
+                    <div>
+                        <p class="rule-title">Fluxo temporal Distorcido</p>
+                        <p class="rule-description">Em combates ou outras cenas que exijam velocidade, cada jogador terá
+                            até 2 minutos para agir. Caso este tempo seja extendido, o turno do personagem é encerrado
+                            prematuramente.
+                        </p>
+                    </div>
+                </li>
+                <li>
+                    <span class="rule-icon">💀</span>
+                    <div>
+                        <p class="rule-title">Insanidade</p>
+                        <p class="rule-description">Em Horizonte Partido a morte não é o maior perigo, mas sim sua
+                            consequência. Ser morto nos Planos dos Pesadelos, indica que sua mente não conseguiu
+                            processar tamanha informação aberrante e veio a enlouquecer. Um personagem que morrer nesta
+                            aventura, não morre no cenário Solarion, porém sofre uma penalidade marcante temporária. A
+                            penalidade
+                            em específico somente o Mestre e o Mestre ADM sabem, assim como sua duração.</p>
+                    </div>
+                </li>
+                <li>
+                    <span class="rule-icon">⚰</span>
+                    <div>
+                        <p class="rule-title">Pessimismo Indescritível</p>
+                        <p class="rule-description">Nenhum personagem recebe 1 Ponto de Heroísmo no início das
+                            sessões.<br>Para obtê-los, é preciso conquistá-los, seja por mérito
+                            interpretativo, ou através dos métodos citados no tópico "Pontos
+                            de Heroísmo" abaixo.
+                        </p>
+                    </div>
+                </li>
+                <li>
+                    <span class="rule-icon">📜</span>
+                    <div>
+                        <p class="rule-title">Pontos de Heroísmo</p>
+                        <p class="rule-description">De forma geral, o mestre é encarregado de premiar Pontos de
+                            Heroísmo, porém existem outros métodos de obtê-lo: Uma vez por rodada, você pode optar por
+                            sofrer um revés narrativo para ganhar 1 ponto de
+                            heroísmo.<br><strong>Exemplos:</strong><br>✕Após rolar um dado, você opta por diminuir
+                            o grau de sucesso em um nível.<br>✕Você opta por aumentar o grau de sucesso de um inimigo
+                            que acabou de te atacar ou afetar.<br>✕Além disso, o Mestre pode te impor uma condição de
+                            acordo com a narrativa, te fornecendo um Ponto de Heroísmono processo.<br>
+                            Obs: O mestre tem a palavra final sobre a troca.</p>
+                    </div>
+                </li>
+            </ul>
+        </section>
+
+        <!-- Info do Mestre -->
+        <section
+            style="text-align: center; background: linear-gradient(135deg, rgba(10, 10, 15, 0.9) 0%, rgba(74, 10, 10, 0.4) 100%);">
+            <h2>✧ Bastidores ✧</h2>
+            <div style="max-width: 600px; margin: 0 auto;">
+                <p style="font-size: 1.3rem; margin-bottom: 20px;">
+                    <strong style="color: var(--blood-red);">Mestre Weber</strong> <span
+                        style="opacity: 0.7;">(Narrador)</span>
+                </p>
+                <p style="opacity: 0.8; line-height: 1.8; font-style: italic;">
+                    –Estou ansioso para narrar esta aventura.<br>Será diferente de tudo que já narrei, vamos ver quantos aguentam até o fim.
+                </p>
+                <hr style="margin: 30px auto; width: 100px; border: none; border-top: 1px solid var(--blood-red);">
+                <p style="font-size: 1.1rem; margin-bottom: 15px;">
+                    <strong style="color: var(--flesh-pale);">Mestre Epitácio</strong> <span
+                        style="opacity: 0.7;">(MESTRE ADM, criador e dono do Cenário)</span>
+                </p>
+                <p style="opacity: 0.7; font-size: 0.9rem;">
+                    –((Alguma frase do Epitácio sobre o que ele espera pra isso aqui.))
+                </p>
+            </div>
+        </section>
+    </main>
+
+    <!-- Credits -->
+    <div class="credits">
+        <p><strong>HORIZONTE PARTIDO</strong></p>
+        <p>Uma aventura de Pathfinder 2e (Remaster)</p>
+        <p>Cenário: <strong>Solarion</strong></p>
+        <p style="margin-top: 30px; font-family: 'Special Elite', cursive; color: var(--blood-red);">
+        </p>
+    </div>
+
+    <footer>
+        <p>Este site é uma criação de fã para fins de entretenimento.</p>
+        <p>Pathfinder e Paizo Inc. são marcas registradas de Paizo Publishing, LLC.</p>
+    </footer>
+
+    <script>
+        // Efeito de clique nos títulos
+        document.querySelectorAll('h2').forEach(title => {
+            title.addEventListener('click', function () {
+                this.style.textShadow = '0 0 20px var(--blood-red), 0 0 40px var(--nightmare-red)';
+                setTimeout(() => {
+                    this.style.textShadow = '';
+                }, 300);
+            });
+        });
+
+        // Efeito de aparecimento suave ao scroll
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('section').forEach(section => {
+            section.style.opacity = '0';
+            section.style.transform = 'translateY(20px)';
+            section.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+            observer.observe(section);
+        });
+
+        // Cursor personalizado - olho que segue
+        document.addEventListener('mousemove', (e) => {
+            const cursor = document.createElement('div');
+            cursor.style.cssText = `
+                position: fixed;
+                width: 20px;
+                height: 20px;
+                border: 2px solid var(--blood-red);
+                border-radius: 50%;
+                pointer-events: none;
+                z-index: 9999;
+                transform: translate(-50%, -50%);
+                transition: transform 0.1s ease;
+                opacity: 0.5;
+            `;
+            cursor.style.left = e.clientX + 'px';
+            cursor.style.top = e.clientY + 'px';
+
+
+        });
+
+        const lightning = document.getElementById('lightning');
+
+        function triggerLightning() {
+            // Adiciona a classe que contém a animação CSS
+            lightning.classList.add('animate-lightning');
+
+            // Remove a classe após a animação acabar (0.6s) para poder repetir depois
+            setTimeout(() => {
+                lightning.classList.remove('animate-lightning');
+            }, 600);
+        }
+
+        setInterval(triggerLightning, 60000);
+    </script>
+</body>
+
+</html>
