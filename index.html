@@ -300,29 +300,28 @@
         }
 
         .character-card:nth-child(1)::before {
-            background-image: url('monkc.png');
-            top: 10px;
-            left: 10px;
+            background-image: url('clericc.png');
+            top: 4.56%;
+            left: 2.64%;
         }
 
         .character-card:nth-child(2)::before {
             background-image: url('druidc.png');
-            top: 10px;
-            left: 374px;
+            top: 4.56%;
+            left: 86.21%;
         }
 
         .character-card:nth-child(3)::before {
             background-image: url('monkc.png');
-            top: 208px;
-            left: 10px;
+            top: 77.7%;
+            left: 2.64%;
         }
 
         .character-card:nth-child(4)::before {
             background-image: url('barbarianc.png');
-            top: 208px;
-            left: 374px;
+            top: 77.7%;
+            left: 86.21%;
         }
-
 
         .character-photo {
             width: 150px;
@@ -976,6 +975,41 @@
         }
 
         setInterval(triggerLightning, 100000);
+
+        // A palavra secreta
+    const codigoSecreto = 'fisti';
+    let entradaUsuario = '';
+
+    // "Ouve" cada tecla pressionada no site
+    window.addEventListener('keydown', (event) => {
+        // Adiciona a tecla digitada à nossa string (convertendo para minúsculo)
+        entradaUsuario += event.key.toLowerCase();
+
+        // Mantém apenas os últimos caracteres correspondentes ao tamanho do código
+        // Isso evita que a variável cresça infinitamente
+        entradaUsuario = entradaUsuario.slice(-codigoSecreto.length);
+
+        // Verifica se o que foi digitado é igual ao código
+        if (entradaUsuario === codigoSecreto) {
+            alert('Parabéns.');
+            
+            // Opcional: limpa a entrada para o usuário poder digitar de novo
+            entradaUsuario = '';
+        }
+    });
+
+    let toques = 0;
+const logo = document.querySelector('.seu-logo'); // Ou qualquer elemento
+
+logo.addEventListener('click', () => {
+    toques++;
+    if (toques === 5) {
+        alert('Parabéns.');
+        toques = 0; // Reseta
+    }
+    // Reseta se demorar muito entre os toques
+    setTimeout(() => { toques = 0; }, 3000); 
+});
     </script>
 </body>
 
