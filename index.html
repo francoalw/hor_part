@@ -308,19 +308,19 @@
         .character-card:nth-child(2)::before {
             background-image: url('druidc.png');
             top: 4.56%;
-            left: 86.21%;
+            left: 2.64%;
         }
 
         .character-card:nth-child(3)::before {
             background-image: url('monkc.png');
-            top: 77.7%;
+            top: 4.56%;
             left: 2.64%;
         }
 
         .character-card:nth-child(4)::before {
             background-image: url('barbarianc.png');
-            top: 77.7%;
-            left: 86.21%;
+            top: 4.56%;
+            left: 2.64%;
         }
 
         .character-photo {
@@ -880,7 +880,8 @@
                         style="opacity: 0.7;">(Narrador)</span>
                 </p>
                 <p style="opacity: 0.8; line-height: 1.8; font-style: italic;">
-                    –Estou ansioso para narrar esta aventura.<br>Será diferente de tudo que já narrei, vamos ver quantos aguentam até o fim.
+                    –Estou ansioso para narrar esta aventura.<br>Será diferente de tudo que já narrei, vamos ver quantos
+                    aguentam até o fim.
                 </p>
                 <hr style="margin: 30px auto; width: 100px; border: none; border-top: 1px solid var(--blood-red);">
                 <p style="font-size: 1.1rem; margin-bottom: 15px;">
@@ -941,25 +942,34 @@
             observer.observe(section);
         });
 
-        // Cursor personalizado - olho que segue
         document.addEventListener('mousemove', (e) => {
             const cursor = document.createElement('div');
             cursor.style.cssText = `
-                position: fixed;
-                width: 20px;
-                height: 20px;
-                border: 2px solid var(--blood-red);
-                border-radius: 50%;
-                pointer-events: none;
-                z-index: 9999;
-                transform: translate(-50%, -50%);
-                transition: transform 0.1s ease;
-                opacity: 0.5;
-            `;
-            cursor.style.left = e.clientX + 'px';
-            cursor.style.top = e.clientY + 'px';
+        position: fixed;
+        width: 20px;
+        height: 20px;
+        border: 2px solid var(--blood-red, red);
+        border-radius: 50%;
+        pointer-events: none;
+        z-index: 9999;
+        transform: translate(-50%, -50%);
+        opacity: 0.5;
+        left: ${e.clientX}px;
+        top: ${e.clientY}px;
+        transition: transform 0.3s ease, opacity 0.3s ease;
+    `;
 
+            document.body.appendChild(cursor); // Adiciona na tela
 
+            // Efeito de sumir e depois remover o elemento para não pesar
+            setTimeout(() => {
+                cursor.style.transform = 'translate(-50%, -50%) scale(0)';
+                cursor.style.opacity = '0';
+            }, 50);
+
+            setTimeout(() => {
+                cursor.remove(); // Remove do HTML definitivamente
+            }, 300);
         });
 
         const lightning = document.getElementById('lightning');
@@ -977,39 +987,39 @@
         setInterval(triggerLightning, 100000);
 
         // A palavra secreta
-    const codigoSecreto = 'fisti';
-    let entradaUsuario = '';
+        const codigoSecreto = 'sara';
+        let entradaUsuario = '';
 
-    // "Ouve" cada tecla pressionada no site
-    window.addEventListener('keydown', (event) => {
-        // Adiciona a tecla digitada à nossa string (convertendo para minúsculo)
-        entradaUsuario += event.key.toLowerCase();
+        // "Ouve" cada tecla pressionada no site
+        window.addEventListener('keydown', (event) => {
+            // Adiciona a tecla digitada à nossa string (convertendo para minúsculo)
+            entradaUsuario += event.key.toLowerCase();
 
-        // Mantém apenas os últimos caracteres correspondentes ao tamanho do código
-        // Isso evita que a variável cresça infinitamente
-        entradaUsuario = entradaUsuario.slice(-codigoSecreto.length);
+            // Mantém apenas os últimos caracteres correspondentes ao tamanho do código
+            // Isso evita que a variável cresça infinitamente
+            entradaUsuario = entradaUsuario.slice(-codigoSecreto.length);
 
-        // Verifica se o que foi digitado é igual ao código
-        if (entradaUsuario === codigoSecreto) {
-            alert('Parabéns.');
-            
-            // Opcional: limpa a entrada para o usuário poder digitar de novo
-            entradaUsuario = '';
-        }
-    });
+            // Verifica se o que foi digitado é igual ao código
+            if (entradaUsuario === codigoSecreto) {
+                alert('Eu amo você, garota.');
 
-    let toques = 0;
-const logo = document.querySelector('.seu-logo'); // Ou qualquer elemento
+                // Opcional: limpa a entrada para o usuário poder digitar de novo
+                entradaUsuario = '';
+            }
+        });
 
-logo.addEventListener('click', () => {
-    toques++;
-    if (toques === 5) {
-        alert('Parabéns.');
-        toques = 0; // Reseta
-    }
-    // Reseta se demorar muito entre os toques
-    setTimeout(() => { toques = 0; }, 3000); 
-});
+        let toques = 0;
+        const logo = document.querySelector('.seu-logo'); // Ou qualquer elemento
+
+        logo.addEventListener('click', () => {
+            toques++;
+            if (toques === 5) {
+                alert('Parabéns.');
+                toques = 0; // Reseta
+            }
+            // Reseta se demorar muito entre os toques
+            setTimeout(() => { toques = 0; }, 3000);
+        });
     </script>
 </body>
 
