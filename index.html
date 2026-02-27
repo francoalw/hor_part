@@ -987,22 +987,25 @@
         setInterval(triggerLightning, 100000);
 
         // A palavra secreta
-       const codigoSecreto = 'capyrus';
-let entradaUsuario = '';
-const modal = document.getElementById('secret-modal');
+        const codigoSecreto = 'capyrus';
+        let entradaUsuario = '';
 
-window.addEventListener('keydown', (event) => {
-    entradaUsuario += event.key.toLowerCase();
-    entradaUsuario = entradaUsuario.slice(-codigoSecreto.length);
+        // "Ouve" cada tecla pressionada no site
+        window.addEventListener('keydown', (event) => {
+            // Adiciona a tecla digitada à nossa string (convertendo para minúsculo)
+            entradaUsuario += event.key.toLowerCase();
 
-    if (entradaUsuario === codigoSecreto) {
-        modal.style.display = 'block'; // Mostra o modal
-        entradaUsuario = '';
-    }
+            // Mantém apenas os últimos caracteres correspondentes ao tamanho do código
+            // Isso evita que a variável cresça infinitamente
+            entradaUsuario = entradaUsuario.slice(-codigoSecreto.length);
 
-    // Fecha o modal ao apertar Escape
-    if (event.key === 'Escape') modal.style.display = 'none';
-});
+            // Verifica se o que foi digitado é igual ao código
+            if (entradaUsuario === codigoSecreto) {
+                alert('Culpa.');
+
+                // Opcional: limpa a entrada para o usuário poder digitar de novo
+                entradaUsuario = '';
+            }
         });
 
         let toques = 0;
@@ -1020,11 +1023,7 @@ window.addEventListener('keydown', (event) => {
     </script>
 </body>
 
-<div id="secret-modal" style="display: none; position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%); background: #1a1a1a; color: #ff4d4d; padding: 40px; border-radius: 8px; box-shadow: 0 0 20px rgba(0,0,0,0.5); font-family: 'Courier New', monospace; z-index: 1000; text-align: center; border: 1px solid #333;">
-    <h1 style="margin: 0; letter-spacing: 5px;">CULPA.</h1>
-    <p style="color: #666; font-size: 0.8em; margin-top: 10px;">Pressione ESC para fechar</p>
-</div>
-    
+
 </html>
 
 
